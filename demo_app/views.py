@@ -1,6 +1,6 @@
 import json
 import logging
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 
 logger = logging.getLogger("django.request")
@@ -61,8 +61,10 @@ def user_profile_view(request):
     user_record = None
     if user_id == "admin":
         user_record = {"username": "admin", "email": "admin@example.com"}
-        
-    # BUG: Directly accessing attribute on None
+    
+    if user_record is None:
+        raise Http404(f"User with id '{user_id}' not found")
+    
     email = user_record["email"] if isinstance(user_record, dict) else user_record.email
     
     return JsonResponse({"user_id": user_id, "email": email})
