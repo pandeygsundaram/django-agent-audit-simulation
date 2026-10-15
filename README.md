@@ -1,6 +1,8 @@
 # Standalone Django AI Auditor Agent Prototype
 
-This prototype listens to backend errors in a Django app, notifies a Slack channel, spawns an AI Auditor Agent with full code context, and replies in the Slack thread with the root cause and a suggested code patch.
+This prototype listens to backend errors in a Django app, notifies a Slack channel, spawns an AI Auditor Agent with full code context, logs GitHub Issues, and executes human-reviewed repairs inside ephemeral Kubernetes Pod sandboxes with automated Pull Requests.
+
+![System Architecture](architecture.jpg)
 
 ---
 
